@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<!-- saved from url=(0093)file:///C:/JET_WORKINGS/jet_eoi_submission_dashboard/1expression_of_interest_jet_window4.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SECTION 03 — EXPRESSION OF INTEREST (EOI) SUBMISSION — JET WINDOW 4</title>
+  <style>
+    :root {
+      --bg-superwhite: #FFFFFF;
+      --navy-blue: #0A192F;
+      --dark-green: #1B4332;
+      --sunny-gold: #D4AF37;
+      --teal: #008080;
+      --text-primary: #1A202C;
+      --text-muted: #4A5568;
+      --card-bg: #F8FAFC;
+      --border-color: #E2E8F0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-superwhite);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 1000px; margin: 0 auto; background: var(--bg-superwhite); }
+
+    /* Top Ownership Badge */
+    .ownership-bar {
+      background: var(--dark-green);
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 6px 6px 0 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--sunny-gold);
+    }
+
+    .ownership-bar span { color: var(--sunny-gold); }
+
+    /* Main Heading Block */
+    .header-block {
+      background-color: var(--navy-blue);
+      color: var(--bg-superwhite);
+      padding: 40px 30px;
+      border-radius: 0 0 8px 8px;
+      border-bottom: 5px solid var(--sunny-gold);
+      margin-bottom: 40px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    .header-block.active-narration {
+      border: 3px solid var(--sunny-gold);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .header-block h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .header-block .subtitle { font-size: 1.1rem; color: var(--sunny-gold); font-weight: 500; margin-bottom: 15px; }
+    .header-block .tags { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.85rem; }
+    .header-block .tag { background: rgba(255, 255, 255, 0.1); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.4); color: #FFFFFF; }
+
+    /* Control Panel */
+    .control-panel {
+      background: #EFF6FF;
+      border: 2px solid #3B82F6;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .control-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .control-title { font-weight: 700; color: #1E40AF; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+    .button-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    
+    .btn-action {
+      background: #2563EB;
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      font-size: 0.9rem;
+    }
+    .btn-action:hover { background: #1D4ED8; }
+    .btn-stop {
+      background: #DC2626;
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .btn-stop:hover { background: #B91C1C; }
+
+    /* Section Styles */
+    section {
+      margin-bottom: 45px;
+      transition: all 0.3s ease;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    section.active-narration {
+      background-color: rgba(59, 130, 246, 0.05);
+      border: 2px solid #3B82F6;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    }
+
+    h2 {
+      color: var(--navy-blue);
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    h2 .section-audio-btn {
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    h2 .section-audio-btn:hover { background: #006666; }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: var(--teal);
+      border-radius: 2px;
+    }
+
+    p { color: var(--text-muted); margin-bottom: 15px; font-size: 1rem; }
+
+    /* Grid Layouts */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+
+    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 20px; }
+    .card-header { font-weight: bold; color: var(--dark-green); font-size: 1.1rem; margin-bottom: 10px; }
+
+    .metric-card { background: #F0FDF4; border: 1px solid var(--dark-green); border-radius: 6px; padding: 15px; text-align: center; }
+    .metric-value { font-size: 1.3rem; font-weight: 800; color: var(--navy-blue); margin-bottom: 5px; }
+    .metric-label { font-size: 0.8rem; font-weight: 700; color: var(--dark-green); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Bullet Lists */
+    ul, ol { padding-left: 0; list-style: none; }
+    ul li { position: relative; padding-left: 20px; margin-bottom: 10px; color: var(--text-muted); }
+    ul li::before { content: '■'; position: absolute; left: 0; color: var(--sunny-gold); font-size: 0.8rem; top: 2px; }
+
+    /* Callout Box */
+    .teachability-box {
+      background-color: #F0FDF4;
+      border-left: 4px solid var(--dark-green);
+      border-right: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 18px 20px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 20px;
+    }
+    .teachability-title { font-weight: 700; color: var(--dark-green); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+
+    /* Tables */
+    .styled-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .styled-table thead tr { background-color: var(--navy-blue); color: #FFFFFF; text-align: left; }
+    .styled-table th, .styled-table td { padding: 12px 15px; border: 1px solid var(--border-color); }
+    .styled-table tbody tr { border-bottom: 1px solid var(--border-color); }
+    .styled-table tbody tr:nth-of-type(even) { background-color: var(--card-bg); }
+    .styled-table tbody tr:last-of-type { border-bottom: 2px solid var(--dark-green); }
+    .styled-table .total-row { font-weight: bold; background-color: #F0FDF4; color: var(--dark-green); }
+
+    /* Interactive Signature Image Stamp Styles */
+    .signature-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px; }
+    @media (max-width: 768px) { .signature-container { grid-template-columns: 1fr; } }
+    .signature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .signature-title { font-size: 0.85rem; font-weight: 700; color: var(--dark-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; }
+    
+    .signature-dropzone {
+      position: relative;
+      width: 100%;
+      height: 110px;
+      margin-bottom: 12px;
+      background: #FFFFFF;
+      border: 1.5px dashed var(--teal);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .signature-dropzone:hover { background: #F0FDF4; border-color: var(--dark-green); }
+    .signature-dropzone p { font-size: 0.8rem; color: var(--text-muted); margin: 0; text-align: center; }
+    
+    .signature-preview-img {
+      max-width: 90%;
+      max-height: 90px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    .signature-actions { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
+    .btn-sig { padding: 6px 12px; font-size: 0.78rem; font-weight: 700; border-radius: 4px; border: none; cursor: pointer; transition: all 0.2s ease; }
+    .btn-upload { background: #E2E8F0; color: var(--navy-blue); }
+    .btn-upload:hover { background: #CBD5E1; }
+    .btn-lock { background: var(--dark-green); color: #FFFFFF; }
+    .btn-lock:hover { background: #143225; }
+    .btn-unlock { background: #D97706; color: #FFFFFF; display: inline-block; }
+    .btn-unlock:hover { background: #B45309; }
+    .btn-sig:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .signatory-name { font-size: 1rem; font-weight: 800; color: var(--navy-blue); }
+    .signatory-role { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; }
+    .signatory-meta { font-size: 0.78rem; color: var(--teal); font-weight: 600; }
+    .signature-status { font-size: 0.75rem; font-weight: 700; color: #D97706; margin-top: 6px; }
+    .signature-status.locked { color: #059669; }
+
+    /* Institutional Profile Footer Block */
+    .institutional-block { background-color: var(--navy-blue); color: #FFFFFF; padding: 30px; border-radius: 8px; margin-top: 40px; border-top: 4px solid var(--dark-green); }
+    .institutional-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; font-size: 0.9rem; }
+    .institutional-item strong { color: var(--sunny-gold); display: block; margin-bottom: 4px; }
+    .contact-link { color: #FFFFFF; text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="container" id="documentContainer">
+
+  <!-- Ownership Header Bar -->
+  <div class="ownership-bar">
+    <div>PROPRIETARY &amp; CONFIDENTIAL — <span>LWANDILE ENGINEERING PROJECTS &amp; INCLUSIVE ENTREPRENEURIAL ACADEMY</span></div>
+    <div>SCAPUSH PRECISION STANDARD</div>
+  </div>
+
+  <!-- Main Heading Block -->
+  <header class="header-block" id="secHeader">
+    <h1>SECTION 03 — EXPRESSION OF INTEREST (EOI) SUBMISSION</h1>
+    <div class="subtitle">JET Funding Platform — Window 4: Sovereign Food &amp; Energy Ecosystem</div>
+    <div class="tags">
+      <span class="tag">Ref: JET-W4-EOI-2026</span>
+      <span class="tag">Location: Mpumalanga, South Africa</span>
+      <span class="tag">Standard: Scapush Precision</span>
+      <span class="tag">Execution Horizon: 12-Month MVP → 36-Month 2.5MW Scale</span>
+    </div>
+  </header>
+
+  <!-- Interactive Control Panel -->
+  <div class="control-panel" role="region" aria-label="Accessibility Control Center">
+    <div class="control-row">
+      <div class="control-title">
+        <span>🔊 Auto-Scrolling Live Narration Engine</span>
+      </div>
+      <div class="button-group">
+        <button class="btn-action" onclick="startAutoScrollingNarration()">▶ Start Auto-Scroll Narration</button>
+        <button class="btn-stop" onclick="stopSpeech()">⏹ Stop / Misa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Governance Information Section -->
+  <section id="sec1">
+    <h2>
+      <span>1. Document Header &amp; Governance Information</span>
+      <button class="section-audio-btn" onclick="speakSingleSection('sec1')">🔊 Listen Section</button>
+    </h2>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Governance Parameter</th>
+          <th>Reference Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Lead Execution Entity</strong></td>
+          <td>Lwandile Engineering Projects (Pty) Ltd (SMME / Technical Delivery Lead)</td>
+        </tr>
+        <tr>
+          <td><strong>Governance &amp; Skills Partner</strong></td>
+          <td>Inclusive Entrepreneurial Academy (Dr. Palesa Charlotte Felix-Faure, Founder)</td>
+        </tr>
+        <tr>
+          <td><strong>Principal / Project Lead</strong></td>
+          <td>Sipho Wiseman Khuzwayo (Inclusive Legacy Architect / Project Lead)</td>
+        </tr>
+        <tr>
+          <td><strong>Academic &amp; Governance Lead</strong></td>
+          <td>Dr. Palesa Charlotte Felix-Faure (Academic Lead &amp; Skills Transfer Principal)</td>
+        </tr>
+        <tr>
+          <td><strong>Target Region</strong></td>
+          <td>Mpumalanga, South Africa</td>
+        </tr>
+        <tr>
+          <td><strong>Submission &amp; Execution Baseline</strong></td>
+          <td>October 2026 Submission | R3.73M MVP Launch → 36-Month 2.5MW Agrivoltaics Expansion</td>
+        </tr>
+        <tr>
+          <td><strong>Execution Standard</strong></td>
+          <td>Scapush Precision Execution Standard</td>
+        </tr>
+        <tr>
+          <td><strong>Funding Window</strong></td>
+          <td>JET Funding Platform — Window 4: Agriculture &amp; Food Systems</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Executive Summary -->
+  <section id="sec2">
+    <h2>
+      <span>2. Executive Summary</span>
+      <button class="section-audio-btn" onclick="speakSingleSection('sec2')">🔊 Listen Section</button>
+    </h2>
+    <p>Lwandile Engineering Projects, in strategic partnership with the <strong>Inclusive Entrepreneurial Academy</strong> (founded by Dr. Palesa Charlotte Felix-Faure), formally submits this Expression of Interest (EOI) under Window 4 of the Just Energy Transition (JET) Funding Platform. Recognizing that JET funding strictly evaluates registered, high-capacity institutional partnerships rather than standalone entities, our consortium delivers an end-to-end framework combining rigorous engineering execution with accredited institutional governance and long-term skills transfer.</p>
+    <p>As coal-fired power infrastructure transitions out of service across Mpumalanga, vulnerable community ecosystems face critical economic challenges. Our consortium deploys an integrated bio-solar and circular agrifood model combining agrivoltaics and controlled-environment hydroponics with an organic waste-to-value biogas and composting pipeline. The immediate rollout is anchored by a <strong>R3.73M Scaled MVP Scope</strong> secured inside a <strong>20,000m² Perimeter Security Fence</strong>.</p>
+    <p>The operational roadmap is engineered across a <strong>12-Month Buffered MVP Execution Schedule (5,640 Labor Man-Hours &amp; 530 Plant-Hours)</strong> culminating in a <strong>36-Month Expansion Horizon</strong> that scales the campus into a full <strong>2.5MW Agrivoltaics Clean Energy &amp; Agrifood Hub</strong>. Executed under the Scapush Precision Execution Standard, this alliance guarantees institutional integrity, SARS compliance, and scalable socioeconomic impact.</p>
+
+    <div class="grid-4">
+      <div class="metric-card">
+        <div class="metric-value">30kWp → 2.5MW</div>
+        <div class="metric-label">Agrivoltaics Scaling</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">20,000 m²</div>
+        <div class="metric-label">Perimeter Security Fence</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">12 Months</div>
+        <div class="metric-label">Buffered MVP Commissioning</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">36 Months</div>
+        <div class="metric-label">2.5MW Campus Horizon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Applicant Eligibility & Governance Compliance Matrix -->
+  <section id="sec3">
+    <h2>
+      <span>3. Applicant Eligibility &amp; Institutional Governance Matrix</span>
+      <button class="section-audio-btn" onclick="speakSingleSection('sec3')">🔊 Listen Section</button>
+    </h2>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Compliance &amp; Partner Parameter</th>
+          <th>Institutional Role / Status</th>
+          <th>Details &amp; Strategic Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Lead Execution Entity</strong></td>
+          <td>Lwandile Engineering Projects (Pty) Ltd</td>
+          <td>100% Black-owned South African private enterprise; technical engineering and infrastructure deployment lead.</td>
+        </tr>
+        <tr>
+          <td><strong>Governance &amp; Skills Partner</strong></td>
+          <td>Inclusive Entrepreneurial Academy</td>
+          <td>Founded by Dr. Palesa Charlotte Felix-Faure; drives institutional governance, curriculum accreditation, and social impact tracking.</td>
+        </tr>
+        <tr>
+          <td><strong>Tax &amp; Legal Compliance</strong></td>
+          <td>Fully Compliant / SARS Good Standing</td>
+          <td>Registered South African entities in full regulatory compliance with active SARS tax PINs.</td>
+        </tr>
+        <tr>
+          <td><strong>Biosecurity &amp; Site Security</strong></td>
+          <td>20,000m² Fenced Compound</td>
+          <td>Immediate Month 1 lockdown with a 2.2m heavy-duty perimeter fence securing all bio-solar assets.</td>
+        </tr>
+        <tr>
+          <td><strong>JET Alignment</strong></td>
+          <td>Institutional Strategy Fit</td>
+          <td>Substantial multi-stakeholder partnership structured for direct grant readiness and governance compliance.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Key Focus Areas & Technical Scope -->
+  <section id="sec4">
+    <h2>
+      <span>4. Key Focus Areas &amp; Technical Scope</span>
+      <button class="section-audio-btn" onclick="speakSingleSection('sec4')">🔊 Listen Section</button>
+    </h2>
+    
+    <div class="card" style="margin-bottom: 20px;">
+      <div class="card-header">4.1 Climate-Smart Agriculture &amp; Agrivoltaics Scaling (30 kWp → 2.5 MW)</div>
+      <ul>
+        <li><strong>Agrivoltaic Dual-Use Infrastructure:</strong> Immediate deployment of 30 kWp solar PV with 60 kWh LFP BESS, serving as the foundational module for the 36-month expansion into a 2.5MW Agrivoltaics solar canopy providing shading and microclimate control.</li>
+        <li><strong>Sovereign Bio-Solar Barns:</strong> Barn 1 (Poultry - 4,800 broilers) and Barn 2 (Swine - 160 head) integrated with 2% sloped gravity flumes feeding the anaerobic digester.</li>
+        <li><strong>Controlled-Environment Agriculture:</strong> Zone F Nursery equipped with hydronic underfloor heating loops powered by biogas CHP thermal recovery.</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+      <div class="card-header">4.2 Circular Bioeconomy &amp; Waste-to-Value (70 m³ Digester &amp; 15 kW CHP)</div>
+      <ul>
+        <li><strong>Anaerobic Digestion:</strong> Construction of a 70m³ fixed-dome masonry biodigester converting swine slurry and agricultural waste into continuous biogas.</li>
+        <li><strong>Thermal &amp; Electrical Co-Generation:</strong> 15 kW Biogas CHP generator providing off-grid baseload power and hot water loop heat for the nursery and brooding pads.</li>
+        <li><strong>Organic Fertilizer &amp; Composting:</strong> Nutrient-rich digestate processing for soil rehabilitation across surrounding local outgrower farms.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">4.3 Governance, Skills Transfer &amp; Accessibility Hub</div>
+      <ul>
+        <li><strong>Inclusive Entrepreneurial Academy:</strong> Accredited training modules led by Dr. Palesa Charlotte Felix-Faure, housed in a dedicated 12m container classroom.</li>
+        <li><strong>Zone M Accessibility Hub:</strong> Step-free universal access paving, 4x wheelchair bays, and a 30kW DC EV charger powered by the microgrid.</li>
+        <li><strong>SCADA Telemetry &amp; Control:</strong> 120-tag PLC control center providing real-time data tracking of power, thermal, and biosecurity metrics.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Budget, Timeline & 36-Month Expansion Horizon -->
+  <section id="sec5">
+    <h2>
+      <span>5. Execution Timelines, Budget &amp; 36-Month Expansion Roadmap</span>
+      <button class="section-audio-btn" onclick="speakSingleSection('sec5')">🔊 Listen Section</button>
+    </h2>
+    <p>The consortium's operational plan translates immediate R3.73M MVP deployment into a 36-month institutional growth framework. The 12-month MVP construction incorporates 5,640 labor man-hours, 530 plant-hours, and a 2.5-month weather/supply-chain contingency buffer.</p>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Execution Phase</th>
+          <th>Timeline Horizon</th>
+          <th>Core Work Packages &amp; Deliverables</th>
+          <th>Budget &amp; Scaling Focus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Phase I: Site Security, Civil &amp; Digester</strong></td>
+          <td>Months 1–3</td>
+          <td>20,000m² perimeter fence, Borehole-01 drilling, 20kL water tower, 70m³ digester masonry bowl.</td>
+          <td>MVP Capital Deployment (15%)</td>
+        </tr>
+        <tr>
+          <td><strong>Phase II: Bio-Solar Barns &amp; Microgrid</strong></td>
+          <td>Months 4–7</td>
+          <td>Barn 1 (4.8k broilers), Barn 2 (160 swine), 30kWp PV, 60kWh BESS, 15kW CHP set placement.</td>
+          <td>MVP Capital Deployment (50%)</td>
+        </tr>
+        <tr>
+          <td><strong>Phase III: SCADA, Academy &amp; Commissioning</strong></td>
+          <td>Months 8–12</td>
+          <td>Hydronic nursery, SCADA 120-tag desk, Zone M access hub, wet testing &amp; biosecurity stocking.</td>
+          <td>MVP Capital Deployment (20%)</td>
+        </tr>
+        <tr style="background: #EFF6FF; font-weight: bold;">
+          <td><strong>Phase IV: 2.5MW Campus Expansion</strong></td>
+          <td>Months 13–36</td>
+          <td>Scaling agrivoltaics to 2.5MW, expanding outgrower network, commercial Carmello hot chocolate facility &amp; regional microgrid integration.</td>
+          <td>Scale Expansion Horizon (15%)</td>
+        </tr>
+        <tr class="total-row">
+          <td>TOTAL PROJECT LIFECYCLE</td>
+          <td>36 Months</td>
+          <td>Complete 2.5MW Sovereign Agrivoltaics, Bio-Solar &amp; Academy Ecosystem</td>
+          <td>100% JET Grant Framework</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="teachability-box">
+      <div class="teachability-title">Consortium Governance &amp; Buffer Safeguards</div>
+      <p style="margin-bottom: 8px; font-size: 0.95rem; color: var(--text-primary);">
+        <strong>Execution Buffer:</strong> Months 11–12 function as built-in wet-commissioning and biosecurity stocking buffers, protecting project deadlines against Highveld rainy season delays.
+      </p>
+      <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--text-primary);">
+        <strong>Capital Governance:</strong> Escrow-managed financial controls led by Dr. Palesa Charlotte Felix-Faure ensuring complete alignment with JET PMU standards.
+      </p>
+    </div>
+  </section>
+
+  <!-- Execution Framework & Next Steps -->
+  <section id="sec6">
+    <h2>
+      <span>6. Execution Framework &amp; Next Steps</span>
+      <button class="section-audio-btn" onclick="speakSingleSection('sec6')">🔊 Listen Section</button>
+    </h2>
+    <p>The project will be governed by a Joint Project Steering Committee (JPSC) co-chaired by Sipho Wiseman Khuzwayo and Dr. Palesa Charlotte Felix-Faure, providing transparent oversight across the 12-month MVP and 36-month expansion phases.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">Key Implementation Milestones</div>
+        <ul>
+          <li><strong>M01–M03:</strong> Perimeter fencing (20,000m²), Borehole-01, and 70m³ digester masonry build.</li>
+          <li><strong>M04–M07:</strong> Superstructures for Barns 1 &amp; 2, 30kWp PV array, and 15kW CHP integration.</li>
+          <li><strong>M08–M12:</strong> SCADA online, Zone M accessibility hub, wet commissioning &amp; stocking.</li>
+          <li><strong>M13–M36:</strong> Phased expansion to 2.5MW Agrivoltaics campus and commercial outgrower network.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Crucial Submission Detail</div>
+        <ul>
+          <li><strong>EOI Submission Target:</strong> November 2026.</li>
+          <li><strong>Execution Standard:</strong> Scapush Precision Execution Standard.</li>
+          <li><strong>Consortium Leads:</strong> Sipho Wiseman Khuzwayo &amp; Dr. Palesa Charlotte Felix-Faure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Signatures & Authorization -->
+    <div class="signature-container">
+      <!-- Signatory 1: Sipho Wiseman Khuzwayo -->
+      <div class="signature-card">
+        <div class="signature-title">Technical &amp; Project Lead Signatory</div>
+        
+        <input type="file" id="file-lead" accept="image/*" style="display: none;">
+        <div class="signature-dropzone" id="dropzone-lead" style="cursor: default;">
+          <p id="placeholder-lead" style="display: none;">Click or drag &amp; drop signature file<br><span style="font-size:0.7rem; color:var(--teal);">(JPG / PNG / SVG)</span></p>
+          <img id="img-lead" class="signature-preview-img" style="display: block;" alt="Signature Preview" src="data:image/png;base64,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">
+        </div>
+        
+        <div class="signature-actions">
+          <button type="button" class="btn-sig btn-upload" id="btn-upload-lead" disabled="">Select File</button>
+          <button type="button" class="btn-sig btn-lock" id="btn-lock-lead" disabled="">Lock Signature</button>
+          <button type="button" class="btn-sig btn-unlock" id="btn-unlock-lead" style="display:inline-block;">Unlock Slot</button>
+        </div>
+
+        <div class="signatory-name">Sipho Wiseman Khuzwayo</div>
+        <div class="signatory-role">Inclusive Legacy Architect / Principal Lead</div>
+        <div class="signatory-meta">Lwandile Engineering Projects (Pty) Ltd</div>
+        <div class="signature-status locked" id="status-lead">Status: Digitally Sealed (2026-11-01 23:20:21 UTC) [Scapush Precision]</div>
+      </div>
+
+      <!-- Signatory 2: Dr. Palesa Charlotte Felix-Faure -->
+      <div class="signature-card">
+        <div class="signature-title">Governance &amp; Skills Partner Signatory</div>
+        
+        <input type="file" id="file-academic" accept="image/*" style="display: none;">
+        <div class="signature-dropzone" id="dropzone-academic">
+          <p id="placeholder-academic" style="display: none;">Click or drag &amp; drop signature file<br><span style="font-size:0.7rem; color:var(--teal);">(JPG / PNG / SVG)</span></p>
+          <img id="img-academic" class="signature-preview-img" style="display: block;" alt="Signature Preview" src="data:image/png;base64,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">
+        </div>
+        
+        <div class="signature-actions">
+          <button type="button" class="btn-sig btn-upload" id="btn-upload-academic">Select File</button>
+          <button type="button" class="btn-sig btn-lock" id="btn-lock-academic">Lock Signature</button>
+          <button type="button" class="btn-sig btn-unlock" id="btn-unlock-academic" style="display:none;">Unlock Slot</button>
+        </div>
+
+        <div class="signatory-name">Dr. Palesa Charlotte Felix-Faure</div>
+        <div class="signatory-role">Founder &amp; Academic Lead</div>
+        <div class="signatory-meta">Inclusive Entrepreneurial Academy</div>
+        <div class="signature-status" id="status-academic">Status: Signature Image Loaded</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Institutional Profile Footer Block -->
+  <footer class="institutional-block" id="secFooter">
+    <div class="institutional-grid">
+      <div class="institutional-item">
+        <strong>Consortium Leadership</strong>
+        Sipho Wiseman Khuzwayo — Lead System Architect (Lwandile Engineering)<br>
+        Dr. Palesa Charlotte Felix-Faure — Academic &amp; Governance Lead (Inclusive Entrepreneurial Academy)
+      </div>
+      <div class="institutional-item">
+        <strong>Execution Entities &amp; Standard</strong>
+        Lwandile Engineering Projects (Pty) Ltd<br>
+        Inclusive Entrepreneurial Academy<br>
+        Scapush Precision Execution Standard
+      </div>
+      <div class="institutional-item">
+        <strong>Operational Footprint</strong>
+        Siyabuswa / Witfontein, Mpumalanga Coal Transition Zone, South Africa
+      </div>
+      <div class="institutional-item">
+        <strong>Primary Contact &amp; Communication</strong>
+        <a href="mailto:siphokhuzwayo12@gmail.com" class="contact-link">siphokhuzwayo12@gmail.com</a><br>
+        <a href="https://www.linkedin.com/search/results/all/?keywords=sipho%20wiseman%20khuzwayo" target="_blank" rel="noopener noreferrer" class="contact-link"></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Auto-Scroll Narration & Signature Image Controller Script -->
+<script>
+  function stopSpeech() {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    clearActiveHighlights();
+  }
+
+  function clearActiveHighlights() {
+    document.querySelectorAll('section, header').forEach(el => el.classList.remove('active-narration'));
+  }
+
+  function highlightAndScroll(elementId) {
+    clearActiveHighlights();
+    const target = document.getElementById(elementId);
+    if (target) {
+      target.classList.add('active-narration');
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  const eoiNarrationSequence = [
+    {
+      elementId: 'secHeader',
+      text: "Expression of Interest Submission for JET Window 4: Agriculture and Food Systems, under the Scapush Precision Execution Standard. Lwandile Engineering Projects in strategic partnership with the Inclusive Entrepreneurial Academy."
+    },
+    {
+      elementId: 'sec1',
+      text: "Section 1. Document Header and Governance Information. Outlining lead consortium leadership between Lwandile Engineering Projects, represented by Sipho Wiseman Khuzwayo as Principal and Project Lead, and the Inclusive Entrepreneurial Academy, founded by Dr. Palesa Charlotte Felix-Faure as Academic and Governance Lead."
+    },
+    {
+      elementId: 'sec2',
+      text: "Section 2. Executive Summary. Formally submitting under Window 4 of the JET Funding Platform. Integrating the R3.73M Scaled MVP secured inside a 20,000 square meter perimeter fence, guided by a 12-month buffered timeline and scaling to a 2.5 megawatt Agrivoltaics campus across a 36-month expansion horizon."
+    },
+    {
+      elementId: 'sec3',
+      text: "Section 3. Applicant Eligibility and Institutional Governance Matrix. Detailing Lwandile Engineering Projects, Inclusive Entrepreneurial Academy, SARS tax compliance, 20,000 square meter fenced compound security, and JET PMU alignment."
+    },
+    {
+      elementId: 'sec4',
+      text: "Section 4. Key Focus Areas and Technical Scope. Climate-smart agrivoltaics scaling from 30 kilowatt peak to 2.5 megawatt, sovereign bio-solar poultry and swine barns, 70 cubic meter digester with 15 kilowatt biogas CHP, and the Inclusive Entrepreneurial Academy with Zone M accessibility hub."
+    },
+    {
+      elementId: 'sec5',
+      text: "Section 5. Execution Timelines, Budget, and 36-Month Expansion Roadmap. Detailing Phase I through Phase III 12-month MVP execution incorporating 5,640 labor hours and 530 plant hours, expanding into Phase IV 36-month scale-up to 2.5 megawatt."
+    },
+    {
+      elementId: 'sec6',
+      text: "Section 6. Execution Framework, Next Steps, and Official Signatures. Managed through a Joint Project Steering Committee co-chaired by Sipho Wiseman Khuzwayo and Dr. Palesa Charlotte Felix-Faure, with EOI submission target set for November 2026."
+    },
+    {
+      elementId: 'secFooter',
+      text: "Institutional profile footer, consortium leadership contacts, execution entities, and official communication channels."
+    }
+  ];
+
+  function playNarrationStep(index) {
+    if (!('speechSynthesis' in window)) return;
+    if (index >= eoiNarrationSequence.length) {
+      clearActiveHighlights();
+      return;
+    }
+
+    const step = eoiNarrationSequence[index];
+    highlightAndScroll(step.elementId);
+
+    let utterance = new SpeechSynthesisUtterance(step.text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.95;
+    utterance.onend = function() {
+      playNarrationStep(index + 1);
+    };
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function startAutoScrollingNarration() {
+    stopSpeech();
+    playNarrationStep(0);
+  }
+
+  function speakSingleSection(sectionId) {
+    stopSpeech();
+    const foundStep = eoiNarrationSequence.find(s => s.elementId === sectionId);
+    if (foundStep) {
+      highlightAndScroll(sectionId);
+      let utterance = new SpeechSynthesisUtterance(foundStep.text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.95;
+      utterance.onend = () => clearActiveHighlights();
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+
+  // Signature Image Controller Setup with Unlock Feature
+  document.addEventListener("DOMContentLoaded", function () {
+    function setupSignatureSlot(prefix) {
+      const fileInput = document.getElementById(`file-${prefix}`);
+      const dropzone = document.getElementById(`dropzone-${prefix}`);
+      const placeholder = document.getElementById(`placeholder-${prefix}`);
+      const imgPreview = document.getElementById(`img-${prefix}`);
+      const btnUpload = document.getElementById(`btn-upload-${prefix}`);
+      const btnLock = document.getElementById(`btn-lock-${prefix}`);
+      const btnUnlock = document.getElementById(`btn-unlock-${prefix}`);
+      const statusText = document.getElementById(`status-${prefix}`);
+
+      let isLocked = false;
+
+      function renderImage(src) {
+        imgPreview.src = src;
+        imgPreview.style.display = "block";
+        placeholder.style.display = "none";
+      }
+
+      dropzone.addEventListener("click", () => { if (!isLocked) fileInput.click(); });
+      btnUpload.addEventListener("click", () => { if (!isLocked) fileInput.click(); });
+
+      fileInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            renderImage(event.target.result);
+            statusText.textContent = "Status: Signature Image Loaded";
+            statusText.classList.remove("locked");
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      dropzone.addEventListener("dragover", (e) => { e.preventDefault(); });
+      dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        if (isLocked) return;
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const file = e.dataTransfer.files[0];
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            renderImage(event.target.result);
+            statusText.textContent = "Status: Signature Image Loaded";
+            statusText.classList.remove("locked");
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      btnLock.addEventListener("click", () => {
+        if (imgPreview.style.display === "none") {
+          alert("Please upload or select a signature image first.");
+          return;
+        }
+        isLocked = true;
+        btnUpload.disabled = true;
+        btnLock.disabled = true;
+        btnUnlock.style.display = "inline-block";
+        dropzone.style.cursor = "default";
+        
+        const lockTimestamp = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+        statusText.textContent = `Status: Digitally Sealed (${lockTimestamp}) [Scapush Precision]`;
+        statusText.classList.add("locked");
+      });
+
+      btnUnlock.addEventListener("click", () => {
+        isLocked = false;
+        btnUpload.disabled = false;
+        btnLock.disabled = false;
+        btnUnlock.style.display = "none";
+        dropzone.style.cursor = "pointer";
+        statusText.textContent = "Status: Unlocked — Ready for Re-signing / Update";
+        statusText.classList.remove("locked");
+      });
+    }
+
+    setupSignatureSlot("lead");
+    setupSignatureSlot("academic");
+  });
+</script>
+
+
+</body></html>

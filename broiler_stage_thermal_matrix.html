@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<!-- saved from url=(0200)file:///C:/Users/ASUS/OneDrive/Documents/MEGA/cocco-master-portal-2026-09-24/cocco-alesssandro/logic-SCADA-telemetry-teachability/Broiler-Microclimate-Controller-Stage-Thermal-Matrix-accessibilty.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broiler Microclimate Controller - Stage Thermal Matrix</title>
+  <style>
+    :root {
+      --bg-dark: #050B14;
+      --card-bg: #0A1322;
+      --card-inner: #0E1A2E;
+      --border-color: #16263F;
+      --border-accent: #00E699;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8; /* Elevated contrast for readability */
+      --accent-green: #00E699;
+      --accent-blue: #00B4D8;
+      --accent-gold: #FFB703;
+      --accent-amber: #F77F00;
+      --focus-outline: #FFD700;
+      --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* High-Contrast / Accessible Theme Overrides */
+    body.high-contrast {
+      --bg-dark: #000000;
+      --card-bg: #000000;
+      --card-inner: #050505;
+      --border-color: #FFFFFF;
+      --border-accent: #FFFF00;
+      --text-main: #FFFFFF;
+      --text-muted: #FFFFFF;
+      --accent-green: #00FF00;
+      --accent-blue: #00FFFF;
+      --accent-gold: #FFFF00;
+      --accent-amber: #FF9900;
+      --focus-outline: #00FF00;
+    }
+
+    /* Accessible Focus Indicators */
+    :focus-visible {
+      outline: 3px solid var(--focus-outline) !important;
+      outline-offset: 4px !important;
+    }
+
+    /* Screen Reader Only Utility Class */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      background-image: 
+        linear-gradient(rgba(0, 230, 153, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 230, 153, 0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .dashboard-container {
+      width: 100%;
+      max-width: 1200px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 230, 153, 0.05);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Accessibility Control Toolbar */
+    .a11y-toolbar {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    .a11y-btn {
+      background: var(--card-inner);
+      color: var(--text-main);
+      border: 1px solid var(--border-accent);
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .a11y-btn:hover, .a11y-btn:focus {
+      background: var(--border-accent);
+      color: #000;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+
+    .brand-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-green);
+      letter-spacing: 0.1em;
+    }
+
+    .brand-badge {
+      background: rgba(0, 230, 153, 0.1);
+      border: 1px solid var(--accent-green);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .main-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .main-title span {
+      color: var(--accent-green);
+    }
+
+    .sub-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .meta-spec-box {
+      display: flex;
+      gap: 16px;
+      background: #070E1A;
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-label {
+      color: var(--text-muted);
+    }
+
+    .meta-val {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .section-frame {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: rgba(14, 26, 46, 0.4);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-sovereign {
+      background: rgba(0, 230, 153, 0.08);
+      border: 1px solid rgba(0, 230, 153, 0.3);
+      color: var(--accent-green);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .section-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    /* Accessible Interactive Buttons replacing basic divs */
+    .stage-card {
+      background: var(--card-inner);
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+      color: var(--text-main);
+      width: 100%;
+    }
+
+    .stage-card:hover {
+      border-color: rgba(0, 230, 153, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .stage-card.active, .stage-card[aria-selected="true"] {
+      border-color: var(--accent-green);
+      background: #112038;
+      box-shadow: 0 0 15px rgba(0, 230, 153, 0.15);
+    }
+
+    .stage-time {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stage-card.active .stage-time {
+      color: var(--accent-green);
+    }
+
+    .stage-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .stage-temp-target {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .stage-temp-target span {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .telemetry-split {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 16px;
+    }
+
+    .panel-box {
+      background: var(--card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .panel-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-green);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .sensor-readout {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .readout-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 11, 20, 0.6);
+      border: 1px solid var(--border-color);
+      padding: 10px 12px;
+      border-radius: 4px;
+    }
+
+    .readout-label {
+      font-size: 0.82rem;
+      color: var(--text-main);
+    }
+
+    .readout-val {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .manifold-schematic {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
+      justify-content: center;
+    }
+
+    .valve-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .valve-label {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .valve-progress-bg {
+      height: 16px;
+      background: #050B14;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .valve-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+      width: 82%;
+      transition: width 0.5s ease;
+    }
+
+    .commentary-box {
+      background: #060E1A;
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-green);
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .commentary-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-green);
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .stage-grid { grid-template-columns: repeat(2, 1fr); }
+      .telemetry-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="">
+
+  <!-- Screen Reader Live Region for Announcements -->
+  <div id="srAnnouncer" class="sr-only" aria-live="polite" aria-atomic="true">High contrast mode disabled</div>
+
+  <main class="dashboard-container">
+    
+    <!-- Inclusive Accessibility Controls -->
+    <aside class="a11y-toolbar" aria-label="Accessibility Settings &amp; Narration Controls">
+      <button class="a11y-btn" onclick="toggleHighContrast()" aria-label="Toggle High-Contrast Mode">
+        👁️ High Contrast
+      </button>
+      <button class="a11y-btn" onclick="toggleAudioNarrator()" id="narratorBtn" aria-pressed="true" aria-label="Toggle Audio Narrator Voice Guidance">
+        🔊 Voice Narrator: <span id="narratorStatus">ON</span>
+      </button>
+    </aside>
+
+    <!-- Header Section -->
+    <header class="header-bar">
+      <div class="brand-title-group">
+        <div class="brand-meta">
+          <span>LWANDILE ENGINEERING PROJECTS</span>
+          <span class="brand-badge">PRESTIGE AUTO-CLIMATE</span>
+        </div>
+        <h1 class="main-title">
+          <span>Broiler Microclimate</span> Controller
+        </h1>
+        <p class="sub-title">
+          Dynamic stage-gated hydronic thermal control &amp; auto SCADA manifold telemetry engine.
+        </p>
+      </div>
+
+      <div class="meta-spec-box" aria-label="Document Metadata">
+        <div class="meta-item">
+          <span class="meta-label">DOC ID</span>
+          <span class="meta-val">LEP-BRW-003</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">VERSION</span>
+          <span class="meta-val">v4.0-PRESTIGE</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">STATUS</span>
+          <span class="meta-val">● ACTIVE</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">AUTHORIZATION</span>
+          <span class="meta-val">S.W. KHUZWAYO</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Interactive Thermal Stage Navigation -->
+    <section class="section-frame" aria-labelledby="sectionTitle">
+      <div class="section-header">
+        <h2 id="sectionTitle" class="section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Automated Thermal Growth Walkthrough
+        </h2>
+        <span class="badge-sovereign">SOVEREIGN TEACHABILITY ENGINE</span>
+      </div>
+
+      <p class="section-desc">
+        Select a growth stage cohort to observe how the automated hydronic mixing manifold adjusts hot water distribution step-downs to guarantee zero mortality across 1,440 birds per pod without bird relocation.
+      </p>
+
+      <!-- Stage Selection Buttons (Full ARIA Tablist Pattern) -->
+      <div class="stage-grid" role="tablist" aria-label="Broiler Growth Stage Selection">
+        <button role="tab" id="stage-tab-1" aria-selected="false" aria-controls="telemetry-panel" class="stage-card" onclick="selectStage(1, 33.5, 82, 'Brooding Phase', 'Chicks require high floor radiant heat (33.5°C) to prevent huddling. Hydronic 3-way valve opens to 82% hot supply mix.')">
+          <div class="stage-time">
+            <span>WEEK 1 (DAYS 1-7)</span>
+            <span aria-hidden="true">➔</span>
+          </div>
+          <div class="stage-title">Brooding Activation</div>
+          <div class="stage-temp-target">Target Floor: <span>33.5°C</span></div>
+        </button>
+
+        <button role="tab" id="stage-tab-2" aria-selected="false" aria-controls="telemetry-panel" class="stage-card" onclick="selectStage(2, 30.0, 68, 'Early Feathering', 'Feathers begin emerging. Thermal setpoint drops by 3.5 degrees Celsius. Valve closes down to 68% flow to prevent overheating.')">
+          <div class="stage-time">
+            <span>WEEK 2 (DAYS 8-14)</span>
+            <span aria-hidden="true">➔</span>
+          </div>
+          <div class="stage-title">Feathering Step-Down</div>
+          <div class="stage-temp-target">Target Floor: <span>30.0°C</span></div>
+        </button>
+
+        <button role="tab" id="stage-tab-3" aria-selected="false" aria-controls="telemetry-panel" class="stage-card" onclick="selectStage(3, 27.0, 52, 'Growth Transition', 'Flock metabolic heat increases. Floor temperature target set to 27 degrees Celsius. Manifold modulates to 52% hot feed balance.')">
+          <div class="stage-time">
+            <span>WEEK 3 (DAYS 15-21)</span>
+            <span aria-hidden="true">➔</span>
+          </div>
+          <div class="stage-title">Metabolic Balance</div>
+          <div class="stage-temp-target">Target Floor: <span>27.0°C</span></div>
+        </button>
+
+        <button role="tab" id="stage-tab-4" aria-selected="true" aria-controls="telemetry-panel" class="stage-card active" onclick="selectStage(4, 24.0, 35, 'Final Grow-out', 'Full plumage achieved. System stabilizes at 24 degrees Celsius floor surface. High air volume tunnel ventilation active.')">
+          <div class="stage-time">
+            <span>WEEK 4+ (DISPATCH)</span>
+            <span aria-hidden="true">➔</span>
+          </div>
+          <div class="stage-title">Grow-out &amp; Harvest</div>
+          <div class="stage-temp-target">Target Floor: <span>24.0°C</span></div>
+        </button>
+      </div>
+
+      <!-- Live Commentary Region with ARIA Live updates -->
+      <div class="commentary-box" aria-live="polite" aria-atomic="true">
+        <div class="commentary-title">LIVE CONTROLLER COMMENTARY</div>
+        <div id="commentaryText"><strong>Final Grow-out:</strong> Full plumage achieved. System stabilizes at 24 degrees Celsius floor surface. High air volume tunnel ventilation active.</div>
+      </div>
+    </section>
+
+    <!-- Live Telemetry Grid -->
+    <div class="telemetry-split" id="telemetry-panel" role="tabpanel" aria-labelledby="stage-tab-4">
+      
+      <!-- Sensor Panel -->
+      <section class="panel-box" aria-label="Pod Thermal Sensors Telemetry">
+        <div class="panel-title">
+          <span>POD THERMAL SENSORS</span>
+          <span>LIVE TELEMETRY</span>
+        </div>
+
+        <div class="sensor-readout">
+          <div class="readout-row">
+            <span class="readout-label">Target Setpoint (T_set)</span>
+            <span class="readout-val" id="valSet" style="color: var(--accent-gold);">24.0 °C</span>
+          </div>
+
+          <div class="readout-row">
+            <span class="readout-label">Actual Floor Surface (T_floor)</span>
+            <span class="readout-val" id="valActual" style="color: var(--accent-green);">23.9 °C</span>
+          </div>
+
+          <div class="readout-row">
+            <span class="readout-label">Hydronic Supply Feed (T_hot)</span>
+            <span class="readout-val" style="color: #FF5252;">60.0 °C</span>
+          </div>
+
+          <div class="readout-row">
+            <span class="readout-label">Hydronic Return Line (T_ret)</span>
+            <span class="readout-val" style="color: var(--accent-blue);">41.2 °C</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Manifold SCADA Control Panel -->
+      <section class="panel-box" aria-label="SCADA Modulating Manifold Diagnostics">
+        <div class="panel-title">
+          <span>SCADA MODULATING MANIFOLD</span>
+          <span>AUTO SCADA LOOP</span>
+        </div>
+
+        <div class="manifold-schematic">
+          <div class="valve-bar-wrap">
+            <div class="valve-label">
+              <span>3-WAY MIXING VALVE POSITION</span>
+              <span id="valvePctText" style="color: var(--accent-green); font-weight: 700;">35% OPEN</span>
+            </div>
+            <!-- Accessible Meter Widget -->
+            <div class="valve-progress-bg" role="meter" id="valveMeter" aria-label="3-Way Mixing Valve Open Position" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
+              <div class="valve-progress-fill" id="valveFill" style="width: 35%;"></div>
+            </div>
+          </div>
+
+          <div class="readout-row" style="margin-top: 6px;">
+            <span class="readout-label">Loop Flow Rate</span>
+            <span class="readout-val" id="valFlow" style="color: var(--accent-blue);">29.6 L/min</span>
+          </div>
+
+          <div class="readout-row">
+            <span class="readout-label">SCADA PID Status</span>
+            <span class="readout-val" style="color: var(--accent-green);">CLOSED LOOP LOCKED</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+    let isNarratorActive = false;
+    const synth = window.speechSynthesis;
+
+    function toggleHighContrast() {
+      document.body.classList.toggle('high-contrast');
+      announce(`High contrast mode ${document.body.classList.contains('high-contrast') ? 'enabled' : 'disabled'}`);
+    }
+
+    function toggleAudioNarrator() {
+      isNarratorActive = !isNarratorActive;
+      const statusBtn = document.getElementById('narratorStatus');
+      const btn = document.getElementById('narratorBtn');
+      
+      statusBtn.textContent = isNarratorActive ? 'ON' : 'OFF';
+      btn.setAttribute('aria-pressed', isNarratorActive.toString());
+
+      if (isNarratorActive) {
+        announce('Voice Narrator activated. Stage changes will be spoken.');
+        speakText('Voice narrator activated. Selecting growth stages will provide audio status updates.');
+      } else {
+        if (synth) synth.cancel();
+        announce('Voice Narrator deactivated.');
+      }
+    }
+
+    function speakText(text) {
+      if (!isNarratorActive || !('speechSynthesis' in window)) return;
+      synth.cancel(); // Stop ongoing speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+      synth.speak(utterance);
+    }
+
+    function announce(text) {
+      const announcer = document.getElementById('srAnnouncer');
+      announcer.textContent = text;
+    }
+
+    function selectStage(weekNum, targetTemp, valvePct, titleText, descText) {
+      // Update Tab Selection States
+      const cards = document.querySelectorAll('.stage-card');
+      cards.forEach((card, idx) => {
+        if (idx === (weekNum - 1)) {
+          card.classList.add('active');
+          card.setAttribute('aria-selected', 'true');
+          card.focus();
+        } else {
+          card.classList.remove('active');
+          card.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      // Update Telemetry Values
+      const actualTemp = (targetTemp - 0.1).toFixed(1);
+      const flowRate = (20 + (valvePct * 0.275)).toFixed(1);
+
+      document.getElementById('valSet').textContent = targetTemp.toFixed(1) + ' °C';
+      document.getElementById('valActual').textContent = actualTemp + ' °C';
+      
+      document.getElementById('valvePctText').textContent = valvePct + '% OPEN';
+      document.getElementById('valveFill').style.width = valvePct + '%';
+      
+      const valveMeter = document.getElementById('valveMeter');
+      valveMeter.setAttribute('aria-valuenow', valvePct);
+
+      document.getElementById('valFlow').textContent = flowRate + ' L/min';
+
+      // Update Commentary & ARIA Live updates
+      const commentary = `<strong>${titleText}:</strong> ${descText}`;
+      document.getElementById('commentaryText').innerHTML = commentary;
+
+      const summaryText = `Week ${weekNum} selected: ${titleText}. Target temperature set to ${targetTemp} degrees. Valve opening set to ${valvePct} percent. ${descText}`;
+      
+      announce(summaryText);
+      speakText(summaryText);
+    }
+  </script>
+
+
+</body></html>
